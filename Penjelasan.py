@@ -41,6 +41,6 @@ st.write("""
     maka gambar hasil clustering tidak akan muncul.
 """)
 
-# Sidebar khusus halaman Penjelasan
+
 st.sidebar.header("Daffa Pratama")
 st.sidebar.write("NIM: 211220025")
