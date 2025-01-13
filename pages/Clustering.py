@@ -23,21 +23,17 @@ def load_dataset():
 
 data = load_dataset()
 
-# Sidebar dengan Nama dan NIM
 st.sidebar.header("Daffa Pratama")
 st.sidebar.write("NIM: 211220025")
 st.sidebar.markdown("""
     <hr style="border: 0; border-top: 1px solid rgba(255, 255, 255, 0.2); margin-top: 10px;">
     """, unsafe_allow_html=True)
 
-# Load the default dataset
 def load_dataset():
     return pd.read_csv('Clustering.csv')
 
-# Memuat dataset
 data = load_dataset()
 
-# Menampilkan detail dataset
 st.write("### Detail Dataset Clustering.csv")
 st.write(f"Total data di dataset: {len(data)}")
 
@@ -60,12 +56,10 @@ if len(features) < 2:
 else:
     X = data[features]
 
-    # Sidebar untuk jumlah cluster
     st.sidebar.header("Opsi Clustering")
     st.sidebar.write("Gunakan slider untuk memilih jumlah cluster.")
     n_clusters = st.sidebar.slider("Pilih jumlah cluster (k)", min_value=2, max_value=10, value=3, step=1)
 
-    # WCSS dan Metode Elbow
     st.write("### Metode Elbow untuk Menentukan Cluster Optimal", unsafe_allow_html=True)
     st.write("""
         Metode Elbow digunakan untuk menentukan jumlah cluster yang optimal dengan melihat titik "elbow" pada grafik. 
@@ -106,7 +100,6 @@ else:
     kmeans = KMeans(n_clusters=n_clusters, random_state=42)
     clusters = kmeans.fit_predict(X)
 
-    # Menambahkan label cluster ke dataset
     data['Cluster'] = clusters
     st.write("### Dataset dengan Label Cluster:", unsafe_allow_html=True)
     st.write("""
@@ -115,7 +108,6 @@ else:
     """)
     st.dataframe(data)
 
-    # Plot hasil clustering (hanya jika 2 fitur yang dipilih)
     if len(features) == 2:
         plt.figure(figsize=(8, 6))
         sns.scatterplot(x=data[features[0]], y=data[features[1]], hue=data['Cluster'], palette="bright", s=100, legend="full")
@@ -127,13 +119,11 @@ else:
         plt.grid(color='#03ff7d', linestyle='--', linewidth=0.5)
 
         scatter_buf = BytesIO()
-        plt.savefig(scatter_buf, format='png', bbox_inches='tight')  # bbox_inches='tight' to prevent cropping
+        plt.savefig(scatter_buf, format='png', bbox_inches='tight') 
         scatter_buf.seek(0)
 
-        # Convert the scatter plot to base64
         scatter_base64 = base64.b64encode(scatter_buf.getvalue()).decode('utf-8')
 
-        # Display the scatter plot with border radius using HTML and CSS
         st.markdown("""
             <img src="data:image/png;base64,{}" style="border-radius: 10px; width: 100%; margin-bottom: 20px;"/>
         """.format(scatter_base64), unsafe_allow_html=True)

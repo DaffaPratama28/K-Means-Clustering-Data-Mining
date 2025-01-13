@@ -1,11 +1,8 @@
-# Streamlit: title="Penjelasan K-Means"
-
 import streamlit as st
 
 with open( "style.css" ) as css:
     st.markdown( f'<style>{css.read()}</style>' , unsafe_allow_html= True)
 
-# Menampilkan title dan navbar
 st.markdown("""
     <h1 style='text-align: center; margin-bottom: 30px;'>Aplikasi K-Means Clustering</h1>
     <div style="display: flex; justify-content: center; margin-bottom: 20px; border-bottom: 2px solid #ccc;">
@@ -14,7 +11,6 @@ st.markdown("""
     </div>
 """, unsafe_allow_html=True)
 
-# Konten halaman penjelasan
 st.write("## Penjelasan K-Means Clustering")
 st.write("""
     K-Means adalah salah satu algoritma clustering yang paling populer. Algoritma ini bekerja dengan cara:
